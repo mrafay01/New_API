@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QURAN_TUTOR_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sub_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__cours__01142BA1" FromRole="Course" ToRole="Enrollment" />
+    <NavigationProperty Name="Enrollments1" Relationship="Self.FK__Enrollmen__cours__5070F446" FromRole="Course" ToRole="Enrollment" />
+    <NavigationProperty Name="TeacherCourses" Relationship="Self.FK__TeacherCo__cours__0A9D95DB" FromRole="Course" ToRole="TeacherCourse" />
+    <NavigationProperty Name="TeacherCourses1" Relationship="Self.FK__TeacherCo__cours__619B8048" FromRole="Course" ToRole="TeacherCourse" />
+    <NavigationProperty Name="QuranLessons" Relationship="Self.FK_QuranLessons_Course" FromRole="Course" ToRole="QuranLesson" />
+    <NavigationProperty Name="Slots" Relationship="Self.FK_Slot_Course" FromRole="Course" ToRole="Slot" />
+  </EntityType>
+  <EntityType Name="CourseProgressLog">
+    <Key>
+      <PropertyRef Name="SessionID" />
+    </Key>
+    <Property Name="SessionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CallStartTime" Type="DateTime" />
+    <Property Name="CallEndTime" Type="DateTime" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EnrollmentSlotId" Type="Int32" />
+    <Property Name="AyatPointerId" Type="Int32" />
+    <Property Name="Lesson_id" Type="Int32" />
+    <NavigationProperty Name="QuranLesson" Relationship="Self.CourseProgress_ForeginKey" FromRole="CourseProgressLog" ToRole="QuranLesson" />
+    <NavigationProperty Name="TeacherRatings" Relationship="Self.FK_Rating_Session" FromRole="CourseProgressLog" ToRole="TeacherRating" />
+    <NavigationProperty Name="EnrollmentSlot" Relationship="Self.FK_VideoCallSession_EnrollmentSlot" FromRole="CourseProgressLog" ToRole="EnrollmentSlot" />
+  </EntityType>
+  <EntityType Name="Enrollment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student_id" Type="Int32" />
+    <Property Name="teacher_id" Type="Int32" />
+    <Property Name="course_id" Type="Int32" />
+    <Property Name="start_date" Type="DateTime" />
+    <Property Name="finish_date" Type="DateTime" />
+    <Property Name="completed" Type="Boolean" />
+    <NavigationProperty Name="Course" Relationship="Self.FK__Enrollmen__cours__01142BA1" FromRole="Enrollment" ToRole="Course" />
+    <NavigationProperty Name="Course1" Relationship="Self.FK__Enrollmen__cours__5070F446" FromRole="Enrollment" ToRole="Course" />
+    <NavigationProperty Name="EnrollmentSlots" Relationship="Self.FK__BookedEnr__enrol__4E88ABD4" FromRole="Enrollment" ToRole="EnrollmentSlot" />
+    <NavigationProperty Name="EnrollmentSlots1" Relationship="Self.FK__BookedEnr__enrol__7F2BE32F" FromRole="Enrollment" ToRole="EnrollmentSlot" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__Enrollmen__qari___02084FDA" FromRole="Enrollment" ToRole="Teacher" />
+    <NavigationProperty Name="Teacher1" Relationship="Self.FK__Enrollmen__qari___5165187F" FromRole="Enrollment" ToRole="Teacher" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__Enrollmen__stude__02FC7413" FromRole="Enrollment" ToRole="Student" />
+    <NavigationProperty Name="Student1" Relationship="Self.FK__Enrollmen__stude__52593CB8" FromRole="Enrollment" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="EnrollmentSlot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enrollment_id" Type="Int32" Nullable="false" />
+    <Property Name="slot_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CourseProgressLogs" Relationship="Self.FK_VideoCallSession_EnrollmentSlot" FromRole="EnrollmentSlot" ToRole="CourseProgressLog" />
+    <NavigationProperty Name="Enrollment" Relationship="Self.FK__BookedEnr__enrol__4E88ABD4" FromRole="EnrollmentSlot" ToRole="Enrollment" />
+    <NavigationProperty Name="Enrollment1" Relationship="Self.FK__BookedEnr__enrol__7F2BE32F" FromRole="EnrollmentSlot" ToRole="Enrollment" />
+    <NavigationProperty Name="Slot" Relationship="Self.FK__BookedEnr__slot___00200768" FromRole="EnrollmentSlot" ToRole="Slot" />
+    <NavigationProperty Name="Slot1" Relationship="Self.FK__BookedEnr__slot___4F7CD00D" FromRole="EnrollmentSlot" ToRole="Slot" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TimeZone" Type="Int32" />
+    <NavigationProperty Name="Students" Relationship="Self.Student_Parent_FK" FromRole="Parent" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Quran">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="SuraID" Type="Int32" Nullable="false" />
+    <Property Name="Ayah_id" Type="Int16" Nullable="false" />
+    <Property Name="AyahText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ruku_id" Type="Int32" />
+    <NavigationProperty Name="Ruku" Relationship="Self.FK_Quran_Ruku" FromRole="Quran" ToRole="Ruku" />
+  </EntityType>
+  <EntityType Name="QuranLesson">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SurahNo" Type="Int32" />
+    <Property Name="RukuID" Type="Int32" />
+    <Property Name="CourseID" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_QuranLessons_Course" FromRole="QuranLesson" ToRole="Course" />
+    <NavigationProperty Name="CourseProgressLogs" Relationship="Self.CourseProgress_ForeginKey" FromRole="QuranLesson" ToRole="CourseProgressLog" />
+    <NavigationProperty Name="Ruku" Relationship="Self.FK_QuranLessons_Ruku" FromRole="QuranLesson" ToRole="Ruku" />
+    <NavigationProperty Name="Surah" Relationship="Self.FK_QuranLessons_Surah" FromRole="QuranLesson" ToRole="Surah" />
+  </EntityType>
+  <EntityType Name="Ruku">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SurahNo" Type="Int32" Nullable="false" />
+    <Property Name="RukuNo" Type="Int32" Nullable="false" />
+    <Property Name="StartingAyahNo" Type="Int32" Nullable="false" />
+    <Property Name="EndingAyahNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Qurans" Relationship="Self.FK_Quran_Ruku" FromRole="Ruku" ToRole="Quran" />
+    <NavigationProperty Name="QuranLessons" Relationship="Self.FK_QuranLessons_Ruku" FromRole="Ruku" ToRole="QuranLesson" />
+  </EntityType>
+  <EntityType Name="Slot">
+    <Key>
+      <PropertyRef Name="slot_id" />
+    </Key>
+    <Property Name="slot_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="time" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="teacher_id" Type="Int32" />
+    <Property Name="booked" Type="Int32" />
+    <Property Name="Course_id" Type="Int32" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Slot_Course" FromRole="Slot" ToRole="Course" />
+    <NavigationProperty Name="EnrollmentSlots" Relationship="Self.FK__BookedEnr__slot___00200768" FromRole="Slot" ToRole="EnrollmentSlot" />
+    <NavigationProperty Name="EnrollmentSlots1" Relationship="Self.FK__BookedEnr__slot___4F7CD00D" FromRole="Slot" ToRole="EnrollmentSlot" />
+    <NavigationProperty Name="Teacher" Relationship="Self.Slot_teacher_FK" FromRole="Slot" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Parent_ID" Type="Int32" />
+    <Property Name="TimeZone" Type="Int32" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__stude__02FC7413" FromRole="Student" ToRole="Enrollment" />
+    <NavigationProperty Name="Enrollments1" Relationship="Self.FK__Enrollmen__stude__52593CB8" FromRole="Student" ToRole="Enrollment" />
+    <NavigationProperty Name="Parent" Relationship="Self.Student_Parent_FK" FromRole="Student" ToRole="Parent" />
+  </EntityType>
+  <EntityType Name="Surah">
+    <Key>
+      <PropertyRef Name="SurahNo" />
+    </Key>
+    <Property Name="SurahNo" Type="Int32" Nullable="false" />
+    <Property Name="SurahName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="QuranLessons" Relationship="Self.FK_QuranLessons_Surah" FromRole="Surah" ToRole="QuranLesson" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ratings" Type="Int32" />
+    <Property Name="hourly_rate" Type="Int32" />
+    <Property Name="SampleClip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TimeZone" Type="Int32" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK__Enrollmen__qari___02084FDA" FromRole="Teacher" ToRole="Enrollment" />
+    <NavigationProperty Name="Enrollments1" Relationship="Self.FK__Enrollmen__qari___5165187F" FromRole="Teacher" ToRole="Enrollment" />
+    <NavigationProperty Name="Slots" Relationship="Self.Slot_teacher_FK" FromRole="Teacher" ToRole="Slot" />
+    <NavigationProperty Name="TeacherCourses" Relationship="Self.FK__TeacherCo__qari___0B91BA14" FromRole="Teacher" ToRole="TeacherCourse" />
+    <NavigationProperty Name="TeacherCourses1" Relationship="Self.FK__TeacherCo__qari___0C85DE4D" FromRole="Teacher" ToRole="TeacherCourse" />
+    <NavigationProperty Name="TeacherCourses2" Relationship="Self.FK__TeacherCo__qari___628FA481" FromRole="Teacher" ToRole="TeacherCourse" />
+    <NavigationProperty Name="TeacherCourses3" Relationship="Self.FK__TeacherCo__qari___6383C8BA" FromRole="Teacher" ToRole="TeacherCourse" />
+  </EntityType>
+  <EntityType Name="TeacherRating">
+    <Key>
+      <PropertyRef Name="RatingID" />
+    </Key>
+    <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="RatingValue" Type="Int32" Nullable="false" />
+    <Property Name="RatedAt" Type="DateTime" />
+    <Property Name="IsParent" Type="Boolean" />
+    <NavigationProperty Name="CourseProgressLog" Relationship="Self.FK_Rating_Session" FromRole="TeacherRating" ToRole="CourseProgressLog" />
+  </EntityType>
+  <EntityType Name="TeacherCourse">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="teacher_id" Type="Int32" />
+    <Property Name="course_id" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK__TeacherCo__cours__0A9D95DB" FromRole="TeacherCourse" ToRole="Course" />
+    <NavigationProperty Name="Course1" Relationship="Self.FK__TeacherCo__cours__619B8048" FromRole="TeacherCourse" ToRole="Course" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__TeacherCo__qari___0B91BA14" FromRole="TeacherCourse" ToRole="Teacher" />
+    <NavigationProperty Name="Teacher1" Relationship="Self.FK__TeacherCo__qari___0C85DE4D" FromRole="TeacherCourse" ToRole="Teacher" />
+    <NavigationProperty Name="Teacher2" Relationship="Self.FK__TeacherCo__qari___628FA481" FromRole="TeacherCourse" ToRole="Teacher" />
+    <NavigationProperty Name="Teacher3" Relationship="Self.FK__TeacherCo__qari___6383C8BA" FromRole="TeacherCourse" ToRole="Teacher" />
+  </EntityType>
+  <Association Name="FK__Enrollmen__cours__01142BA1">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Enrollmen__cours__5070F446">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__cours__0A9D95DB">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__cours__619B8048">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuranLessons_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="QuranLesson" Type="Self.QuranLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="QuranLesson">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Slot_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Slot" Type="Self.Slot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Slot">
+        <PropertyRef Name="Course_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CourseProgress_ForeginKey">
+    <End Role="QuranLesson" Type="Self.QuranLesson" Multiplicity="0..1" />
+    <End Role="CourseProgressLog" Type="Self.CourseProgressLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuranLesson">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseProgressLog">
+        <PropertyRef Name="Lesson_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rating_Session">
+    <End Role="CourseProgressLog" Type="Self.CourseProgressLog" Multiplicity="1" />
+    <End Role="TeacherRating" Type="Self.TeacherRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseProgressLog">
+        <PropertyRef Name="SessionID" />
+      </Principal>
+      <Dependent Role="TeacherRating">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VideoCallSession_EnrollmentSlot">
+    <End Role="EnrollmentSlot" Type="Self.EnrollmentSlot" Multiplicity="0..1" />
+    <End Role="CourseProgressLog" Type="Self.CourseProgressLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EnrollmentSlot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseProgressLog">
+        <PropertyRef Name="EnrollmentSlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookedEnr__enrol__4E88ABD4">
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="1" />
+    <End Role="EnrollmentSlot" Type="Self.EnrollmentSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enrollment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="EnrollmentSlot">
+        <PropertyRef Name="enrollment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookedEnr__enrol__7F2BE32F">
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="1" />
+    <End Role="EnrollmentSlot" Type="Self.EnrollmentSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enrollment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="EnrollmentSlot">
+        <PropertyRef Name="enrollment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Enrollmen__qari___02084FDA">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Enrollmen__qari___5165187F">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Enrollmen__stude__02FC7413">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Enrollmen__stude__52593CB8">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookedEnr__slot___00200768">
+    <End Role="Slot" Type="Self.Slot" Multiplicity="1" />
+    <End Role="EnrollmentSlot" Type="Self.EnrollmentSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slot">
+        <PropertyRef Name="slot_id" />
+      </Principal>
+      <Dependent Role="EnrollmentSlot">
+        <PropertyRef Name="slot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookedEnr__slot___4F7CD00D">
+    <End Role="Slot" Type="Self.Slot" Multiplicity="1" />
+    <End Role="EnrollmentSlot" Type="Self.EnrollmentSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slot">
+        <PropertyRef Name="slot_id" />
+      </Principal>
+      <Dependent Role="EnrollmentSlot">
+        <PropertyRef Name="slot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Student_Parent_FK">
+    <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Parent_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quran_Ruku">
+    <End Role="Ruku" Type="Self.Ruku" Multiplicity="0..1" />
+    <End Role="Quran" Type="Self.Quran" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ruku">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Quran">
+        <PropertyRef Name="Ruku_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuranLessons_Ruku">
+    <End Role="Ruku" Type="Self.Ruku" Multiplicity="0..1" />
+    <End Role="QuranLesson" Type="Self.QuranLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ruku">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuranLesson">
+        <PropertyRef Name="RukuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuranLessons_Surah">
+    <End Role="Surah" Type="Self.Surah" Multiplicity="0..1" />
+    <End Role="QuranLesson" Type="Self.QuranLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Surah">
+        <PropertyRef Name="SurahNo" />
+      </Principal>
+      <Dependent Role="QuranLesson">
+        <PropertyRef Name="SurahNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Slot_teacher_FK">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Slot" Type="Self.Slot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Slot">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__qari___0B91BA14">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__qari___0C85DE4D">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__qari___628FA481">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherCo__qari___6383C8BA">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="TeacherCourse" Type="Self.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QURAN_TUTOR_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="CourseProgressLogs" EntityType="Self.CourseProgressLog" />
+    <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
+    <EntitySet Name="EnrollmentSlots" EntityType="Self.EnrollmentSlot" />
+    <EntitySet Name="Parents" EntityType="Self.Parent" />
+    <EntitySet Name="Qurans" EntityType="Self.Quran" />
+    <EntitySet Name="QuranLessons" EntityType="Self.QuranLesson" />
+    <EntitySet Name="Rukus" EntityType="Self.Ruku" />
+    <EntitySet Name="Slots" EntityType="Self.Slot" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Surahs" EntityType="Self.Surah" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="TeacherRatings" EntityType="Self.TeacherRating" />
+    <EntitySet Name="TeacherCourses" EntityType="Self.TeacherCourse" />
+    <AssociationSet Name="FK__Enrollmen__cours__01142BA1" Association="Self.FK__Enrollmen__cours__01142BA1">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Enrollmen__cours__5070F446" Association="Self.FK__Enrollmen__cours__5070F446">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__cours__0A9D95DB" Association="Self.FK__TeacherCo__cours__0A9D95DB">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__cours__619B8048" Association="Self.FK__TeacherCo__cours__619B8048">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuranLessons_Course" Association="Self.FK_QuranLessons_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="QuranLesson" EntitySet="QuranLessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Slot_Course" Association="Self.FK_Slot_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Slot" EntitySet="Slots" />
+    </AssociationSet>
+    <AssociationSet Name="CourseProgress_ForeginKey" Association="Self.CourseProgress_ForeginKey">
+      <End Role="QuranLesson" EntitySet="QuranLessons" />
+      <End Role="CourseProgressLog" EntitySet="CourseProgressLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rating_Session" Association="Self.FK_Rating_Session">
+      <End Role="CourseProgressLog" EntitySet="CourseProgressLogs" />
+      <End Role="TeacherRating" EntitySet="TeacherRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VideoCallSession_EnrollmentSlot" Association="Self.FK_VideoCallSession_EnrollmentSlot">
+      <End Role="EnrollmentSlot" EntitySet="EnrollmentSlots" />
+      <End Role="CourseProgressLog" EntitySet="CourseProgressLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookedEnr__enrol__4E88ABD4" Association="Self.FK__BookedEnr__enrol__4E88ABD4">
+      <End Role="Enrollment" EntitySet="Enrollments" />
+      <End Role="EnrollmentSlot" EntitySet="EnrollmentSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookedEnr__enrol__7F2BE32F" Association="Self.FK__BookedEnr__enrol__7F2BE32F">
+      <End Role="Enrollment" EntitySet="Enrollments" />
+      <End Role="EnrollmentSlot" EntitySet="EnrollmentSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Enrollmen__qari___02084FDA" Association="Self.FK__Enrollmen__qari___02084FDA">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Enrollmen__qari___5165187F" Association="Self.FK__Enrollmen__qari___5165187F">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Enrollmen__stude__02FC7413" Association="Self.FK__Enrollmen__stude__02FC7413">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Enrollmen__stude__52593CB8" Association="Self.FK__Enrollmen__stude__52593CB8">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Enrollment" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookedEnr__slot___00200768" Association="Self.FK__BookedEnr__slot___00200768">
+      <End Role="Slot" EntitySet="Slots" />
+      <End Role="EnrollmentSlot" EntitySet="EnrollmentSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookedEnr__slot___4F7CD00D" Association="Self.FK__BookedEnr__slot___4F7CD00D">
+      <End Role="Slot" EntitySet="Slots" />
+      <End Role="EnrollmentSlot" EntitySet="EnrollmentSlots" />
+    </AssociationSet>
+    <AssociationSet Name="Student_Parent_FK" Association="Self.Student_Parent_FK">
+      <End Role="Parent" EntitySet="Parents" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quran_Ruku" Association="Self.FK_Quran_Ruku">
+      <End Role="Ruku" EntitySet="Rukus" />
+      <End Role="Quran" EntitySet="Qurans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuranLessons_Ruku" Association="Self.FK_QuranLessons_Ruku">
+      <End Role="Ruku" EntitySet="Rukus" />
+      <End Role="QuranLesson" EntitySet="QuranLessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuranLessons_Surah" Association="Self.FK_QuranLessons_Surah">
+      <End Role="Surah" EntitySet="Surahs" />
+      <End Role="QuranLesson" EntitySet="QuranLessons" />
+    </AssociationSet>
+    <AssociationSet Name="Slot_teacher_FK" Association="Self.Slot_teacher_FK">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Slot" EntitySet="Slots" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__qari___0B91BA14" Association="Self.FK__TeacherCo__qari___0B91BA14">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__qari___0C85DE4D" Association="Self.FK__TeacherCo__qari___0C85DE4D">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__qari___628FA481" Association="Self.FK__TeacherCo__qari___628FA481">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherCo__qari___6383C8BA" Association="Self.FK__TeacherCo__qari___6383C8BA">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

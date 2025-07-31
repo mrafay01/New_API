@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QURAN_TUTOR_DBTutorModelStoreContainer" CdmEntityContainer="TutorEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="Sub_title" ColumnName="Sub_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourseProgressLogs">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.CourseProgressLog">
+        <MappingFragment StoreEntitySet="CourseProgressLog">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CallStartTime" ColumnName="CallStartTime" />
+          <ScalarProperty Name="CallEndTime" ColumnName="CallEndTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnrollmentSlot_Id" ColumnName="EnrollmentSlot_Id" />
+          <ScalarProperty Name="AyatPointerId" ColumnName="AyatPointerId" />
+          <ScalarProperty Name="QuranLesson_id" ColumnName="QuranLesson_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enrollments">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Enrollment">
+        <MappingFragment StoreEntitySet="Enrollment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="finish_date" ColumnName="finish_date" />
+          <ScalarProperty Name="completed" ColumnName="completed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnrollmentSlots">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.EnrollmentSlot">
+        <MappingFragment StoreEntitySet="EnrollmentSlot">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="enrollment_id" ColumnName="enrollment_id" />
+          <ScalarProperty Name="slot_id" ColumnName="slot_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parents">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Parent">
+        <MappingFragment StoreEntitySet="Parent">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="cnic" ColumnName="cnic" />
+          <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Qurans">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Quran">
+        <MappingFragment StoreEntitySet="Quran">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="surah_id" ColumnName="surah_id" />
+          <ScalarProperty Name="Ayah_id" ColumnName="Ayah_id" />
+          <ScalarProperty Name="AyahText" ColumnName="AyahText" />
+          <ScalarProperty Name="Ruku_id" ColumnName="Ruku_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuranLessons">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.QuranLesson">
+        <MappingFragment StoreEntitySet="QuranLesson">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="SurahNo" ColumnName="SurahNo" />
+          <ScalarProperty Name="ruku_id" ColumnName="ruku_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rukus">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Ruku">
+        <MappingFragment StoreEntitySet="Ruku">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="SurahNo" ColumnName="SurahNo" />
+          <ScalarProperty Name="RukuNo" ColumnName="RukuNo" />
+          <ScalarProperty Name="StartingAyahNo" ColumnName="StartingAyahNo" />
+          <ScalarProperty Name="EndingAyahNo" ColumnName="EndingAyahNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slots">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Slot">
+        <MappingFragment StoreEntitySet="Slot">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="booked" ColumnName="booked" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+          <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Surahs">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Surah">
+        <MappingFragment StoreEntitySet="Surah">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="SurahName" ColumnName="SurahName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.Teacher">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="cnic" ColumnName="cnic" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="qualification" ColumnName="qualification" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="ratings" ColumnName="ratings" />
+          <ScalarProperty Name="hourly_rate" ColumnName="hourly_rate" />
+          <ScalarProperty Name="SampleClip" ColumnName="SampleClip" />
+          <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeacherRatings">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.TeacherRating">
+        <MappingFragment StoreEntitySet="TeacherRating">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="courseProgressLog_id" ColumnName="courseProgressLog_id" />
+          <ScalarProperty Name="RatingValue" ColumnName="RatingValue" />
+          <ScalarProperty Name="RatedAt" ColumnName="RatedAt" />
+          <ScalarProperty Name="IsParent" ColumnName="IsParent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeacherCourses">
+      <EntityTypeMapping TypeName="QURAN_TUTOR_DBTutorModel.TeacherCourse">
+        <MappingFragment StoreEntitySet="TeacherCourse">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8e3e5ca449c54cd9a5b2c364e47c00d1" Name="Diagram1">
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Course" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.CourseProgressLog" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Enrollment" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.EnrollmentSlot" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Parent" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Quran" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.QuranLesson" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Ruku" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Student" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Surah" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Teacher" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.TeacherRating" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.TeacherCourse" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Enrollment_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_QuranLesson_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_TeacherCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_CourseProgressLog_EnrollmentSlot" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_CourseProgressLog_QuranLesson" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_TeacherRating_CourseProgressLog" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Enrollment_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Enrollment_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_EnrollmentSlot_Enrollment" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Student_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Quran_Ruku" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Quran_Surah" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_QuranLesson_Ruku" ManuallyRouted="false" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_TeacherCourse_Teacher" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QURAN_TUTOR_DBModel.Slot" Width="1.5" PointX="3" PointY="1.625" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_EnrollmentSlot_Slot" />
+        <AssociationConnector Association="QURAN_TUTOR_DBModel.FK_Slot_Teacher" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
